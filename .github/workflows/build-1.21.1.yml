@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Vendor Minecraft 1.21.1 library versions
+        run: python .github/scripts/vendor_dependencies.py
+
       - name: Validate datapack structure and JSON
         run: python .github/scripts/validate_datapack.py
 
