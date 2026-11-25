@@ -15,7 +15,7 @@
               },
               "ops": [
                 {
-                  "source": "data.molChest.components.\\"minecraft:custom_data\\"",
+                  "source": "data.molChest.components.\"minecraft:custom_data\"",
                   "target": "",
                   "op": "merge"
                 }
