@@ -5,4 +5,4 @@
 # flag here: close_chest uses it to decide whether to create an owner entry.
 
 # Generate this chest's original loot into the temporary barrel inventory.
-execute as @p[tag=mol.temp] run loot insert ~ ~ ~ loot $(LootTable)
+$execute as @p[tag=mol.temp] run loot insert ~ ~ ~ loot $(LootTable)
