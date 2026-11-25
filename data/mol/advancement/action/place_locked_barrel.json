@@ -1,25 +1,18 @@
 {
-	"criteria": {
-		"barrel": {
-			"trigger": "placed_block",
-			"conditions": {
-				"location": [
-					{
-						"condition": "location_check",
-						"predicate": {
-							"block": {
-								"blocks": [
-									"minecraft:barrel"
-								],
-								"nbt": "{Lock:\"§mol:chest\"}"
-							}
-						}
-					}
-				]
-			}
-		}
-	},
-	"rewards": {
-		"function": "mol:action/place_locked_barrel/"
-	}
+  "criteria": {
+    "barrel": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": ["minecraft:barrel"],
+            "nbt": "{Lock:\\"§mol:chest\\"}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "mol:action/place_locked_barrel/"
+  }
 }
