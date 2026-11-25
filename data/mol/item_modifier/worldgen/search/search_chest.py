@@ -35,7 +35,7 @@ for x in X_RANGE:
                             "offsetZ": z,
                             "predicate": {
                                 "block": {
-                                    "nbt": "{\\"Lock\\":\\"§mol:chest\\"}"
+                                    "nbt": '{"Lock":"§mol:chest"}'
                                 }
                             }
                         }
