@@ -40,7 +40,7 @@
                     {
                       "Slot": 0,
                       "id": "minecraft:stone",
-                      "count": 1,
+                      "Count": 1,
                       "components": {
                         "minecraft:custom_data": {
                           "smithed": {
