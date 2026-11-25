@@ -5,8 +5,10 @@
       "conditions": {
         "location": {
           "block": {
-            "blocks": ["minecraft:barrel"],
-            "nbt": "{Lock:\\"§mol:chest\\"}"
+            "blocks": [
+              "minecraft:barrel"
+            ],
+            "nbt": "{Lock:\"§mol:chest\"}"
           }
         }
       }
