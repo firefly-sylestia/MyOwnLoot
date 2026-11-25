@@ -11,5 +11,6 @@ data modify block ~ ~ ~ Lock set from entity @s item.components."minecraft:custo
 #remove the information that it's open
 tag @s remove mol.open
 scoreboard players reset @s mol.chest_looted
-# Keep mol.id: it is the persistent per-player ownership key assigned on join.
-# Resetting it here made subsequent chest visits lose the player's identity.
+scoreboard players reset @s mol.id
+# reset is more efficient here because it's really likely that the player will open lots of chests
+# with set 0 the game would have to store a lot of useless data
