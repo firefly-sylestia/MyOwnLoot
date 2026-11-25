@@ -1,10 +1,14 @@
 ## function mol:schedule/
 
+# One confirmation per player, including players who joined before a reload.
+execute unless entity @s[tag=mol.joined] run tellraw @s [{"text":"[MyOwnLoot] ","color":"dark_aqua"},{"text":"Datapack is active. Your personal chest and barrel loot is enabled.","color":"green"}]
+tag @s add mol.joined
+
 # get the x and z position of the player
 execute store result score #pos_x mol.data run data get entity @s Pos[0]
 execute store result score #pos_z mol.data run data get entity @s Pos[2]
 
-# get the x and z position +/- the area_size, this is done by dividing the position by the area_size, then multiplying by the area_size again, this can be done because scoreboard values are integers
+# get the x and z position +/- the area_size, this is done by dividing the position by the area_size, then multiplying the position by the area_size again, this can be done because scoreboard values are integers
 scoreboard players operation #pos_x mol.data /= #area_size mol.data
 scoreboard players operation #pos_x mol.data *= #area_size mol.data
 scoreboard players operation #pos_z mol.data /= #area_size mol.data
