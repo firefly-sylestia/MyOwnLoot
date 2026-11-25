@@ -25,31 +25,17 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:custom_model_data": 9449900,
-                "minecraft:custom_name": {
-                  "text": "MOL Chest",
-                  "italic": false
-                },
+                "minecraft:custom_name": "{\"text\":\"MOL Chest\",\"italic\":false}",
                 "minecraft:lore": [
-                  {
-                    "text": "mol",
-                    "color": "blue"
-                  }
+                  "{\"text\":\"mol\",\"color\":\"blue\"}"
                 ],
                 "minecraft:block_entity_data": {
+                  "id": "minecraft:furnace",
                   "Items": [
                     {
                       "Slot": 0,
                       "id": "minecraft:stone",
-                      "Count": 1,
-                      "components": {
-                        "minecraft:custom_data": {
-                          "smithed": {
-                            "block": {
-                              "id": "Rignchen:mol/molChest"
-                            }
-                          }
-                        }
-                      }
+                      "Count": 1
                     }
                   ]
                 }
