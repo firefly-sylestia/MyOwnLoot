@@ -29,14 +29,23 @@ else:
         if not (data / namespace).is_dir():
             errors.append(f"Missing bundled namespace: data/{namespace}/")
 
-    # Minecraft 1.21 renamed these datapack registry directories to singular.
-    legacy_dirs = {
+    # Minecraft 1.21 renamed registry directories to singular. Restrict
+    # checks to registry roots so valid loot_table/blocks and loot_table/items
+    # subfolders are not mistaken for old registry names.
+    legacy_roots = {
         "functions", "loot_tables", "item_modifiers", "predicates", "advancements",
-        "blocks", "entity_types", "items", "fluids",
+    }
+    legacy_tag_roots = {
+        "functions", "blocks", "entity_types", "items", "fluids",
     }
     for path in data.rglob("*"):
-        if path.is_dir() and path.name in legacy_dirs:
-            errors.append(f"Legacy 1.20 directory name remains: {path.relative_to(ROOT)}")
+        if not path.is_dir():
+            continue
+        parts = path.relative_to(data).parts
+        if len(parts) == 2 and parts[1] in legacy_roots:
+            errors.append(f"Legacy 1.20 registry directory remains: {path.relative_to(ROOT)}")
+        if len(parts) == 3 and parts[1] == "tags" and parts[2] in legacy_tag_roots:
+            errors.append(f"Legacy 1.20 tag registry directory remains: {path.relative_to(ROOT)}")
 
     json_files = sorted(data.rglob("*.json"))
     for path in json_files:
