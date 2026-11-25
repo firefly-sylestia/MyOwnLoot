@@ -1,7 +1,7 @@
 ## function mol:smithed_block/block/mol_chest
 ## function mol:worldgen/chest_location
 
-data merge entity @s {item:{Count:1b,id:"minecraft:furnace",tag:{CustomModelData:9449900,mol:{Items:[],Lock:""}}},brightness:{block:15,sky:15},transformation:{scale:[0.5f,0.5f,0.5f]},Tags:["mol.chest","itemio.container.nope","itemio.comtainer"]}
+data merge entity @s {item:{id:"minecraft:furnace",count:1,components:{"minecraft:custom_model_data":9449900,"minecraft:custom_data":{mol:{Items:[],Lock:""}}}},brightness:{block:15,sky:15},transformation:{scale:[0.5f,0.5f,0.5f]},Tags:["mol.chest","itemio.container.nope","itemio.comtainer"]}
 function #itemio:calls/container/init
 
 function mol:worldgen/become_barrel
