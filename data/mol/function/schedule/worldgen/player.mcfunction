@@ -6,9 +6,9 @@
 execute unless score @s mol.id matches 1.. run function mol:action/join
 
 # First-time welcome, plus a reliable returning-player welcome.
-execute unless entity @s[tag=mol.joined] run tellraw @s [{"text":"[MyOwnLoot v1.2.1] ","color":"dark_aqua"},{"text":"Datapack is active. Your personal chest and barrel loot is enabled.","color":"green"}]
+execute unless entity @s[tag=mol.joined] run tellraw @s [{"text":"[MyOwnLoot v1.2.2] ","color":"dark_aqua"},{"text":"Datapack is active. Your personal chest and barrel loot is enabled.","color":"green"}]
 tag @s add mol.joined
-execute if score @s mol.leave matches 1.. run tellraw @s [{"text":"[MyOwnLoot v1.2.1] ","color":"dark_aqua"},{"text":"Welcome back! Your personal chest and barrel loot is enabled.","color":"green"}]
+execute if score @s mol.leave matches 1.. run tellraw @s [{"text":"[MyOwnLoot v1.2.2] ","color":"dark_aqua"},{"text":"Welcome back! Your personal chest and barrel loot is enabled.","color":"green"}]
 scoreboard players reset @s mol.leave
 
 # get the x and z position of the player

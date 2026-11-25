@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the 1.21.1 item modifier used to locate locked structure chests.
+"""Generate the 1.21.1 item modifier used to locate supported loot chests.
 
-The generated modifier adds coordinates to the marker item's custom_data
-component. Container matching is delegated to the mol:containers block tag so
-vanilla, common-tagged modded containers, and Cobblemon gilded chests are found.
-Minecraft 1.20.5+ replaced set_nbt with set_custom_data.
+The datapack's inventory adapter currently transforms vanilla chest blocks into
+vanilla barrels. Modded containers are deliberately excluded until a safe
+block-specific adapter exists; treating a modded chest as a vanilla barrel
+would leave a detached display entity and could damage the container.
 """
 from __future__ import annotations
 
