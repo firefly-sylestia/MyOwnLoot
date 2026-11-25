@@ -1,8 +1,10 @@
 {
 	"display": {
 		"icon": {
-			"item": "minecraft:furnace",
-			"nbt": "{CustomModelData: 9449900}"
+			"id": "minecraft:furnace",
+			"components": {
+				"minecraft:custom_model_data": 9449900
+			}
 		},
 		"title": "Chest Looter",
 		"description": "Loot 100 chests"
