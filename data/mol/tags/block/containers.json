@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#mol:chests",
+    "#mol:barrels"
+  ]
+}

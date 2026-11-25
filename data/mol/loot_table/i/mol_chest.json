@@ -1,0 +1,49 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:furnace",
+          "functions": [
+            {
+              "function": "minecraft:copy_custom_data",
+              "source": {
+                "type": "storage",
+                "source": "mol:items"
+              },
+              "ops": [
+                {
+                  "source": "data.molChest.components.\"minecraft:custom_data\"",
+                  "target": "",
+                  "op": "merge"
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:custom_model_data": 9449900,
+                "minecraft:custom_name": "{\"text\":\"MOL Chest\",\"italic\":false}",
+                "minecraft:lore": [
+                  "{\"text\":\"mol\",\"color\":\"blue\"}"
+                ],
+                "minecraft:block_entity_data": {
+                  "id": "minecraft:furnace",
+                  "Items": [
+                    {
+                      "Slot": 0,
+                      "id": "minecraft:stone",
+                      "Count": 1
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

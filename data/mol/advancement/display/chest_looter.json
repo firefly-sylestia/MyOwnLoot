@@ -1,0 +1,43 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:furnace",
+			"components": {
+				"minecraft:custom_model_data": 9449900
+			}
+		},
+		"title": "Chest Looter",
+		"description": "Loot 100 chests"
+	},
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"location": [
+					{
+						"condition": "minecraft:location_check",
+						"predicate": {
+							"block": {
+								"blocks": [
+									"minecraft:chest"
+								]
+							}
+						}
+					}
+				],
+				"player": [
+					{
+						"entity": "this",
+						"condition": "entity_scores",
+						"scores": {
+							"mol.chest_looted" : {
+								"min": 100
+							}
+						}
+					}
+				]
+			}
+		}
+	},
+	"parent": "minecraft:adventure/root"
+}

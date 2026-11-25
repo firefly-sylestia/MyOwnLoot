@@ -1,0 +1,20 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:furnace",
+			"components": {
+				"minecraft:custom_model_data": 9449900
+			}
+		},
+		"title": "My Own Loots",
+		"description": "Allow multiple players to loot the same chest",
+		"show_toast": false,
+		"announce_to_chat": false
+	},
+	"parent": "global:rignchen",
+	"criteria": {
+		"trigger": {
+			"trigger": "minecraft:tick"
+		}
+	}
+}
