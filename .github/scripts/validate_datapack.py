@@ -65,7 +65,7 @@ else:
         import re
         for path in mol_root.rglob("*.mcfunction"):
             source = path.read_text(encoding="utf-8")
-            if re.search(r"\\b(?:item|Item)\\.tag\\b|\\bCount:|\\bCustomModelData:|\\bBlockEntityTag:", source):
+            if re.search(r"\b(?:item|Item)\.tag\b|\bCount:|\bCustomModelData:|\bBlockEntityTag:", source):
                 errors.append(f"Legacy item-stack NBT remains: {path.relative_to(ROOT)}")
         for path in mol_root.rglob("*.json"):
             try:
@@ -75,7 +75,7 @@ else:
             icon = document.get("display", {}).get("icon", {})
             if "nbt" in icon or "item" in icon:
                 errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
-            if re.search(r'"function"\\s*:\\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
+            if re.search(r'"function"\s*:\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
                 errors.append(f"Legacy copy_nbt loot function remains: {path.relative_to(ROOT)}")
 
 if errors:
