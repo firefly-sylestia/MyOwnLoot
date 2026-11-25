@@ -1,5 +1,10 @@
 ## function mol:schedule/
 
+# Ensure every online player has a persistent ownership ID.
+# The join advancement handles new joins; this also repairs players who were
+# already online or had the advancement completed before this datapack version.
+execute unless score @s mol.id matches 1.. run function mol:action/join
+
 # One confirmation per player, including players who joined before a reload.
 execute unless entity @s[tag=mol.joined] run tellraw @s [{"text":"[MyOwnLoot] ","color":"dark_aqua"},{"text":"Datapack is active. Your personal chest and barrel loot is enabled.","color":"green"}]
 tag @s add mol.joined
