@@ -1,0 +1,41 @@
+name: Build Minecraft 1.21.1 datapack
+
+on:
+  push:
+    branches:
+      - upgrade/minecraft-1.21.1
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out datapack
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate datapack structure and JSON
+        run: python .github/scripts/validate_datapack.py
+
+      - name: Package datapack
+        run: |
+          mkdir -p dist
+          cd "$GITHUB_WORKSPACE"
+          zip -qr dist/MyOwnLoot-MC-1.21.1.zip pack.mcmeta data
+
+      - name: Upload datapack ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyOwnLoot-MC-1.21.1
+          path: dist/MyOwnLoot-MC-1.21.1.zip
+          if-no-files-found: error
