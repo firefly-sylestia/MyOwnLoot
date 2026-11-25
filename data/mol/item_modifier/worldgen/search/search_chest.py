@@ -2,8 +2,9 @@
 """Generate the 1.21.1 item modifier used to locate locked structure chests.
 
 The generated modifier adds coordinates to the marker item's custom_data
-component. Minecraft 1.20.5+ replaced the old set_nbt item modifier with
-set_custom_data.
+component. Container matching is delegated to the mol:containers block tag so
+vanilla, common-tagged modded containers, and Cobblemon gilded chests are found.
+Minecraft 1.20.5+ replaced set_nbt with set_custom_data.
 """
 from __future__ import annotations
 
@@ -46,7 +47,7 @@ for x in X_RANGE:
                         "offsetY": y,
                         "offsetZ": z,
                         "predicate": {
-                            "block": {"blocks": ["minecraft:chest"]}
+                            "block": {"tag": "mol:containers"}
                         }
                     }
                 ]
