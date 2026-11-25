@@ -68,28 +68,8 @@ else:
             if re.search(r"\b(?:item|Item)\.tag\b|\bCount:|\bCustomModelData:|\bBlockEntityTag:", source):
                 errors.append(f"Legacy item-stack NBT remains: {path.relative_to(ROOT)}")
 
-            # Every command that contains a function macro parameter must
-            # start with '        for path in mol_root.rglob("*.json"):
-            try:
-                document = json.loads(path.read_text(encoding="utf-8"))
-            except (OSError, json.JSONDecodeError):
-                continue
-            if isinstance(document, dict):
-                icon = document.get("display", {}).get("icon", {})
-                if isinstance(icon, dict) and ("nbt" in icon or "item" in icon):
-                    errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
-            if re.search(r'"function"\s*:\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
-                errors.append(f"Legacy copy_nbt loot function remains: {path.relative_to(ROOT)}")
-
-if errors:
-    print("Datapack validation FAILED:")
-    for error in errors:
-        print(f" - {error}")
-    sys.exit(1)
-
-print("Datapack structure and JSON validation passed.")
-print("Note: this does not replace loading the pack in a Minecraft 1.21.1 server.")
-, otherwise Minecraft treats $(name) literally.
+            # Function macro parameters are only expanded on lines prefixed
+            # with '$'. Catch missing prefixes before they reach a server.
             for line_number, line in enumerate(source.splitlines(), start=1):
                 stripped = line.lstrip()
                 if stripped.startswith("#") or "$(" not in line:
@@ -97,28 +77,9 @@ print("Note: this does not replace loading the pack in a Minecraft 1.21.1 server
                 if not stripped.startswith("$"):
                     errors.append(
                         f"Unexpanded function macro in {path.relative_to(ROOT)}:"
-                        f"{line_number} (command is missing the leading '        for path in mol_root.rglob("*.json"):
-            try:
-                document = json.loads(path.read_text(encoding="utf-8"))
-            except (OSError, json.JSONDecodeError):
-                continue
-            if isinstance(document, dict):
-                icon = document.get("display", {}).get("icon", {})
-                if isinstance(icon, dict) and ("nbt" in icon or "item" in icon):
-                    errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
-            if re.search(r'"function"\s*:\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
-                errors.append(f"Legacy copy_nbt loot function remains: {path.relative_to(ROOT)}")
-
-if errors:
-    print("Datapack validation FAILED:")
-    for error in errors:
-        print(f" - {error}")
-    sys.exit(1)
-
-print("Datapack structure and JSON validation passed.")
-print("Note: this does not replace loading the pack in a Minecraft 1.21.1 server.")
-)"
+                        f"{line_number} (command is missing the leading '$')"
                     )
+
         for path in mol_root.rglob("*.json"):
             try:
                 document = json.loads(path.read_text(encoding="utf-8"))
