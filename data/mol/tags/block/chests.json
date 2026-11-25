@@ -3,8 +3,6 @@
   "values": [
     "minecraft:chest",
     "minecraft:trapped_chest",
-    "#c:chests",
-    "#cobblemon:gilded_chests",
-    "#cobblemon:block/gilded_chests"
+    "#c:chests"
   ]
 }
