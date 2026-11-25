@@ -16,7 +16,7 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[2]
 URL = (
     "https://api.smithed.dev/v2/download"
-    "?pack=itemio&pack=custom_block&version=1.21.1&mode=datapack"
+    "?pack=itemio&pack=custom-block&version=1.21.1&mode=datapack"
 )
 EXPECTED = {"itemio", "smithed.custom_block"}
 
