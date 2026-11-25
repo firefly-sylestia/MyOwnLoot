@@ -9,7 +9,7 @@ execute if block ~ ~ ~ chest[facing=north] run setblock ~ ~ ~ barrel[facing=nort
 execute if block ~ ~ ~ chest[facing=south] run setblock ~ ~ ~ barrel[facing=south]
 execute if block ~ ~ ~ chest[facing=west] run setblock ~ ~ ~ barrel[facing=west]
 
-#put data back
+# Convert any remaining tagged chest (including modded/gilded variants)\n# into the barrel interaction block used by MyOwnLoot.\nexecute if block ~ ~ ~ #mol:chests run setblock ~ ~ ~ barrel[facing=north]\n\n#put data back
 data modify block ~ ~ ~ Lock set from entity @s item.components."minecraft:custom_data".mol.Lock
 
 #remove all item poping out
