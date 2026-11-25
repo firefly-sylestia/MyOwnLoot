@@ -15,7 +15,7 @@
               },
               "ops": [
                 {
-                  "source": "data.molChest.components.\"minecraft:custom_data\"",
+                  "source": "data.molChest.components.\\"minecraft:custom_data\\"",
                   "target": "",
                   "op": "merge"
                 }
@@ -35,10 +35,10 @@
                     "color": "blue"
                   }
                 ],
-                "minecraft:container": [
-                  {
-                    "slot": 0,
-                    "item": {
+                "minecraft:block_entity_data": {
+                  "Items": [
+                    {
+                      "Slot": 0,
                       "id": "minecraft:stone",
                       "count": 1,
                       "components": {
@@ -51,8 +51,8 @@
                         }
                       }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           ]
