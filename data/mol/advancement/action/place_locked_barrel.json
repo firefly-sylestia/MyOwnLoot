@@ -3,14 +3,19 @@
     "barrel": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "location": {
-          "block": {
-            "blocks": [
-              "minecraft:barrel"
-            ],
-            "nbt": "{Lock:\"§mol:chest\"}"
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:barrel"
+                ],
+                "nbt": "{Lock:\"§mol:chest\"}"
+              }
+            }
           }
-        }
+        ]
       }
     }
   },
