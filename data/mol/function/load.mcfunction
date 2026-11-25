@@ -17,8 +17,8 @@ scoreboard players set #chest_drop mol.data 0
 #start chest detection loop
 schedule function mol:schedule/ 2s
 
-#tell it is loaded
-tellraw @a[tag=convention.debug] [{"text":"[MOL]","color":"dark_aqua"},{"text":" My Own Loots has been loaded","color":"aqua"}]
+#broadcast only after the core MOL initialization function has run
+tellraw @a [{"text":"[MyOwnLoot] ","color":"dark_aqua"},{"text":"Datapack loaded. Chest and barrel tracking initialized.","color":"green"}]
 
 #define
 #define entity @a[tag=convention.debug]
