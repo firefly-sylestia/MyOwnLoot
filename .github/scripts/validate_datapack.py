@@ -58,6 +58,26 @@ else:
     if not functions:
         errors.append("No .mcfunction files found")
 
+    # My Own Loot used pre-1.20.5 item NBT. Catch regressions in its own
+    # commands and loot tables while allowing legitimate block-entity NBT.
+    mol_root = data / "mol"
+    if mol_root.is_dir():
+        import re
+        for path in mol_root.rglob("*.mcfunction"):
+            source = path.read_text(encoding="utf-8")
+            if re.search(r"\\b(?:item|Item)\\.tag\\b|\\bCount:|\\bCustomModelData:|\\bBlockEntityTag:", source):
+                errors.append(f"Legacy item-stack NBT remains: {path.relative_to(ROOT)}")
+        for path in mol_root.rglob("*.json"):
+            try:
+                document = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            icon = document.get("display", {}).get("icon", {})
+            if "nbt" in icon or "item" in icon:
+                errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
+            if re.search(r'"function"\\s*:\\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
+                errors.append(f"Legacy copy_nbt loot function remains: {path.relative_to(ROOT)}")
+
 if errors:
     print("Datapack validation FAILED:")
     for error in errors:
