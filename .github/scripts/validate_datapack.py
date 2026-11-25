@@ -72,9 +72,10 @@ else:
                 document = json.loads(path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
                 continue
-            icon = document.get("display", {}).get("icon", {})
-            if "nbt" in icon or "item" in icon:
-                errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
+            if isinstance(document, dict):
+                icon = document.get("display", {}).get("icon", {})
+                if isinstance(icon, dict) and ("nbt" in icon or "item" in icon):
+                    errors.append(f"Legacy advancement icon item format remains: {path.relative_to(ROOT)}")
             if re.search(r'"function"\s*:\s*"(?:(?:minecraft):)?copy_nbt"', path.read_text(encoding="utf-8")):
                 errors.append(f"Legacy copy_nbt loot function remains: {path.relative_to(ROOT)}")
 
