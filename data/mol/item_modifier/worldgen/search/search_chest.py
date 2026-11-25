@@ -1,54 +1,56 @@
-# use this loot table to check the location of a chest in the chunck
+#!/usr/bin/env python3
+"""Generate the 1.21.1 item modifier used to locate locked structure chests.
 
-from json import dumps
-from os import path
+The generated modifier adds coordinates to the marker item's custom_data
+component. Minecraft 1.20.5+ replaced the old set_nbt item modifier with
+set_custom_data.
+"""
+from __future__ import annotations
 
-x_range = (0, 16)
-y_range = (-64, 318)
-z_range = (0, 16)
+import json
+from pathlib import Path
 
-all_tests = []
+ROOT = Path(__file__).resolve().parents[5]
+OUTPUT = Path(__file__).with_name("search_chest.json")
 
-item_modifier = lambda x, y, z: {
-	"function": "minecraft:set_nbt",
-	"tag": "{x:%s,y:%s,z:%s}" % (x, y, z),
-	"conditions": [
-		{
-			"condition": "minecraft:inverted",
-			"term": {
-				"condition": "minecraft:location_check",
-				"offsetX": x,
-				"offsetY": y,
-				"offsetZ": z,
-				"predicate": {
-					"block": {
-						"nbt": "{\"Lock\":\"§mol:chest\"}"
-					}
-				}
-			}
-		},
-		{
-			"condition": "minecraft:location_check",
-			"offsetX": x,
-			"offsetY": y,
-			"offsetZ": z,
-			"predicate": {
-				"block": {
-					"blocks": [
-						"minecraft:chest"
-					]
-				}
-			}
-		}
-	]
-}
+# The datapack searches each block position in the current 16x16 chunk.
+X_RANGE = range(0, 16)
+Y_RANGE = range(-64, 320)
+Z_RANGE = range(0, 16)
 
-for x in range(x_range[0], x_range[1]):
-	for y in range(y_range[0], y_range[1]):
-		for z in range(z_range[0], z_range[1]):
-			all_tests.append(item_modifier(x, y, z))
+modifiers = []
+for x in X_RANGE:
+    for y in Y_RANGE:
+        for z in Z_RANGE:
+            modifiers.append({
+                "function": "minecraft:set_custom_data",
+                "tag": {"x": x, "y": y, "z": z},
+                "conditions": [
+                    {
+                        "condition": "minecraft:inverted",
+                        "term": {
+                            "condition": "minecraft:location_check",
+                            "offsetX": x,
+                            "offsetY": y,
+                            "offsetZ": z,
+                            "predicate": {
+                                "block": {
+                                    "nbt": "{\\"Lock\\":\\"§mol:chest\\"}"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "condition": "minecraft:location_check",
+                        "offsetX": x,
+                        "offsetY": y,
+                        "offsetZ": z,
+                        "predicate": {
+                            "block": {"blocks": ["minecraft:chest"]}
+                        }
+                    }
+                ]
+            })
 
-
-
-with open(path.join(__file__.removesuffix(path.basename(__file__)), "search_chest.json"), "w") as f:
-	f.write(dumps(all_tests, indent="\t"))
+OUTPUT.write_text(json.dumps(modifiers, separators=(",", ":")) + "\n", encoding="utf-8")
+print(f"Generated {len(modifiers):,} 1.21.1 chest-location item modifiers: {OUTPUT}")
